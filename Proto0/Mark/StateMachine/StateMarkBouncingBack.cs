@@ -6,13 +6,13 @@ using UnityEngine;
 
 namespace Proto0
 {
-    public class StateMarkBounceBack : BaseStateMark
+    public class StateMarkBouncingBack : BaseStateMark
     {
         private float durTemp;
         private float durLeft;
         private bool toEnd;
 
-        public StateMarkBounceBack(StateParamMark param) : base(param) { }
+        public StateMarkBouncingBack(StateParamMark param) : base(param) { }
 
         public override void OnEntrance()
         {

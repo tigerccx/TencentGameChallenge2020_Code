@@ -35,7 +35,7 @@ namespace Proto0
             if (toBounceBack)
             {
                 PropertyAnimationManager.GetInstance().EndAnimatingPropertyVector3(param.mark.transform, "position", PropertyAnimationManager.EndPropertyState.Keep);
-                return new StateMarkBounceBack(param);
+                return new StateMarkBouncingBack(param);
             }
             if (toBeActivated)
             {
