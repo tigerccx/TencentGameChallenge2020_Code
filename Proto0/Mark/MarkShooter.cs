@@ -9,7 +9,12 @@ namespace Proto0
     {
         [SerializeField]
         GameObject prefabMark;
-        Mark markInstance;
+        private Mark markInstance;
+
+        [SerializeField]
+        private StateMachineMark smMark;
+        public StateMachineMark SMMark { get => smMark; }
+
         public Mark MarkInstance { get => markInstance; }
 
         [SerializeField]
@@ -44,21 +49,39 @@ namespace Proto0
         /// </summary>
         public void Deploy(Vector3 posW)
         {
+            // Create Mark
             GameObject goMark = GameObject.Instantiate(prefabMark, transform.position, Quaternion.identity);
 
+            // 
+            // Init Mark
+            //
             markInstance = goMark.GetComponent<Mark>();
-            markInstance.transMarkShooter = transform;
-            markInstance.eventOnRetrieved += () => {
+
+            Action onEnd = () => {
                 if (rope != null) GameObject.Destroy(rope.gameObject); rope = null;
-                if (markInstance != null) GameObject.Destroy(markInstance.gameObject); markInstance = null;
+                markInstance = null;
             };
+            markInstance.onBouncedBack += onEnd;
+            markInstance.onRetrieved += onEnd;
             if (enableActiveSpeedUp)
             {
-                markInstance.eventOnActivated += OnMarkActivated;
-                markInstance.eventOnDeactivated += OnMarkDeactivated;
+                markInstance.onActivated += OnMarkActivated;
+                markInstance.onDeactivated += OnMarkDeactivated;
             }
-            markInstance.MoveTowards(posW);
 
+            //
+            // Init StateMachineMark
+            //
+            smMark = goMark.GetComponent<StateMachineMark>();
+            StateParamMark param = new StateParamMark();
+            param.mark = markInstance;
+            param.transformMarkShooter = transform;
+            param.posTarg = posW;
+            smMark.paramMark = param;
+
+            //
+            // Create Rope
+            //
             GameObject goRope = GameObject.Instantiate(prefabRope);
             rope = goRope.GetComponent<MarkRope>();
             rope.transChara = transform;
@@ -71,7 +94,7 @@ namespace Proto0
         /// </summary>
         public void Retrieve()
         {
-            markInstance.MoveBack();
+            smMark.ManualRetrieve();
         }
 
         /// <summary>

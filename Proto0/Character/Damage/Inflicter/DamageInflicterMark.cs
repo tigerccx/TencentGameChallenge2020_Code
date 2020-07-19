@@ -18,6 +18,7 @@ namespace Proto0
             DamageReceiverEnemy receiver = collision.gameObject.GetComponent<DamageReceiverEnemy>();
             if (receiver != null)
             {
+                print("DAMAGE");
                 InflictDamage(receiver);
             }
         }

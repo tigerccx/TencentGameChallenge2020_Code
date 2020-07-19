@@ -42,7 +42,7 @@ namespace Proto0
                     posW.z = 0;
                     shooter.Deploy(posW);
                 }
-                else if (!shooter.MarkInstance.IsDeploying && ! shooter.MarkInstance.IsRetrieving)
+                else if (shooter.SMMark.IsActive)
                 {
                     shooter.Retrieve();
                 }
