@@ -26,20 +26,10 @@ namespace Proto0
         /// <param name="collision"></param>
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            TimeZoneEffectController slowable = collision.gameObject.GetComponent<TimeZoneEffectController>();
-            if (slowable != null)
+            TimeZoneEffectController tzec = collision.gameObject.GetComponent<TimeZoneEffectController>();
+            if (tzec != null)
             {
-                ISpeedController sc = collision.gameObject.GetComponent<ISpeedController>();
-                if (sc != null)
-                {
-                    sc.SetSpeed(sc.GetSpeed() * magSpeed);
-                }
-            }
-
-            Split spt = collision.gameObject.GetComponent<Split>();
-            if (spt != null)
-            {
-                spt.SetTimeScale(spt.GetTimeScale() * magSpeed);
+                tzec.OnEnterTimeZone(this);
             }
         }
 
@@ -49,20 +39,10 @@ namespace Proto0
         /// <param name="collision"></param>
         private void OnTriggerExit2D(Collider2D collision)
         {
-            TimeZoneEffectController slowable = collision.gameObject.GetComponent<TimeZoneEffectController>();
-            if (slowable != null)
+            TimeZoneEffectController tzec = collision.gameObject.GetComponent<TimeZoneEffectController>();
+            if (tzec != null)
             {
-                ISpeedController sc = collision.gameObject.GetComponent<ISpeedController>();
-                if (sc != null)
-                {
-                    sc.SetSpeed(sc.GetSpeed() / magSpeed);
-                }
-            }
-
-            Split spt = collision.gameObject.GetComponent<Split>();
-            if (spt != null)
-            {
-                spt.SetTimeScale(spt.GetTimeScale() / magSpeed);
+                tzec.OnExitTimeZone(this);
             }
         }
     }
