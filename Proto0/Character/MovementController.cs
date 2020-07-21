@@ -5,7 +5,7 @@ using System;
 
 namespace Proto0
 {
-    public class CharacterController : MonoBehaviour
+    public class MovementController : MonoBehaviour
     {
         [NonSerialized]
         public float magSpeed = 1;

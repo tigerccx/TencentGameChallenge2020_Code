@@ -10,32 +10,34 @@ namespace Proto0
         [SerializeField]
         GameObject prefabMark;
         private Mark markInstance;
+        public Mark MarkInstance { get => markInstance; }
 
-        [SerializeField]
         private StateMachineMark smMark;
         public StateMachineMark SMMark { get => smMark; }
-
-        public Mark MarkInstance { get => markInstance; }
 
         [SerializeField]
         GameObject prefabRope;
         MarkRope rope;
 
         [SerializeField]
-        SpeedChangable speedChangable;
+        SpeedController speedChangable;
         [SerializeField]
         float speedUpScale = 1.67f;
 
         public bool enableActiveSpeedUp = false;
 
+        public event Action eventOnMarkDeploying; 
+        public event Action eventOnMarkRetrieving; 
+        public event Action eventOnMarkRetrieved;
+        public event Action eventOnMarkBouncingBack;
+        public event Action eventOnMarkBouncedBack; 
         public event Action eventOnMarkActivated;
         public event Action eventOnMarkDeactivated;
 
         // Start is called before the first frame update
         void Start()
         {
-            eventOnMarkActivated += SpeedUp;
-            eventOnMarkDeactivated += RestoreSpeed;
+            
         }
 
         // Update is called once per frame
@@ -67,6 +69,11 @@ namespace Proto0
             {
                 markInstance.onActivated += OnMarkActivated;
                 markInstance.onDeactivated += OnMarkDeactivated;
+                markInstance.onDeactivated += OnMarkDeploying;
+                markInstance.onRetrieving += OnMarkRetrieving;
+                markInstance.onRetrieved += OnMarkRetrieved;
+                markInstance.onBouncingBack += OnMarkBouncingBack;
+                markInstance.onBouncedBack += OnMarkBouncedBack;
             }
 
             //
@@ -100,33 +107,46 @@ namespace Proto0
         /// <summary>
         /// Speed up character by set scale
         /// </summary>
-        private void SpeedUp()
+        public void SetToScaledSpeed()
         {
-            speedChangable.ScaleSpeed(speedUpScale);
+            speedChangable.SetSpeedScale(speedUpScale);
         }
 
         /// <summary>
         /// Restore normal character speed
         /// </summary>
-        private void RestoreSpeed()
+        public void RestoreScaledSpeed()
         {
-            speedChangable.RestoreSpeed();
+            speedChangable.RestoreSpeedScale();
         }
 
-        /// <summary>
-        /// Triggered when mark is activated
-        /// </summary>
         private void OnMarkActivated()
         {
             eventOnMarkActivated?.Invoke();
         }
-
-        /// <summary>
-        /// Triggered when mark is deactivated
-        /// </summary>
         private void OnMarkDeactivated()
         {
             eventOnMarkDeactivated?.Invoke();
+        }
+        private void OnMarkDeploying()
+        {
+            eventOnMarkDeploying?.Invoke();
+        }
+        private void OnMarkRetrieving()
+        {
+            eventOnMarkRetrieving?.Invoke();
+        }
+        private void OnMarkRetrieved()
+        {
+            eventOnMarkRetrieved?.Invoke();
+        }
+        private void OnMarkBouncingBack()
+        {
+            eventOnMarkBouncingBack?.Invoke();
+        }
+        private void OnMarkBouncedBack()
+        {
+            eventOnMarkBouncedBack?.Invoke();
         }
     }
 }

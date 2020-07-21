@@ -7,7 +7,7 @@ namespace Proto0
     public class Enemy : MonoBehaviour
     {
         [SerializeField]
-        CharacterController controller;
+        MovementController controller;
         public float maxDis;
         float sqrMaxDis;
         public float minDis;

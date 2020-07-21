@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Proto0
 {
-    public interface ISpeedChangable
+    public interface ISpeedController
     {
         /// <summary>
         /// Get default speed
@@ -20,11 +20,11 @@ namespace Proto0
         /// Scale the speed by scale
         /// </summary>
         /// <param name="scale">Scale</param>
-        void ScaleSpeed(float scale);
+        void SetSpeedScale(float scale);
         /// <summary>
         /// Restore the speed before scaling
         /// </summary>
-        void RestoreSpeed();
+        void RestoreSpeedScale();
     }
 }
 

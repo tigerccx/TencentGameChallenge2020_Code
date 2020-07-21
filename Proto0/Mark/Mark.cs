@@ -58,8 +58,6 @@ namespace Proto0
         //
         // Timing
         //
-        private float durLeft;
-        private float durTemp;
 
         public float durDeploy = 0.5f;
         public float durRetrieve = 0.3f;

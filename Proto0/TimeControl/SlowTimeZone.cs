@@ -26,10 +26,10 @@ namespace Proto0
         /// <param name="collision"></param>
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            TimeZoneSlowable slowable = collision.gameObject.GetComponent<TimeZoneSlowable>();
+            TimeZoneEffectController slowable = collision.gameObject.GetComponent<TimeZoneEffectController>();
             if (slowable != null)
             {
-                ISpeedChangable sc = collision.gameObject.GetComponent<ISpeedChangable>();
+                ISpeedController sc = collision.gameObject.GetComponent<ISpeedController>();
                 if (sc != null)
                 {
                     sc.SetSpeed(sc.GetSpeed() * magSpeed);
@@ -49,10 +49,10 @@ namespace Proto0
         /// <param name="collision"></param>
         private void OnTriggerExit2D(Collider2D collision)
         {
-            TimeZoneSlowable slowable = collision.gameObject.GetComponent<TimeZoneSlowable>();
+            TimeZoneEffectController slowable = collision.gameObject.GetComponent<TimeZoneEffectController>();
             if (slowable != null)
             {
-                ISpeedChangable sc = collision.gameObject.GetComponent<ISpeedChangable>();
+                ISpeedController sc = collision.gameObject.GetComponent<ISpeedController>();
                 if (sc != null)
                 {
                     sc.SetSpeed(sc.GetSpeed() / magSpeed);

@@ -5,13 +5,13 @@ using UnityEngine;
 
 namespace Proto0
 {
-    public class SpeedChangableChara : SpeedChangable
+    public class SpeedControllerEnemy : SpeedController
     {
-        CharacterController controller;
+        MovementController controller;
 
         private void Start()
         {
-            controller = GetComponent<CharacterController>();
+            controller = GetComponent<MovementController>();
         }
 
         public override float GetSpeed()
@@ -21,16 +21,16 @@ namespace Proto0
 
         public override void SetSpeed(float s)
         {
-            print("SetSpeed " + gameObject + "  speed: " + s);
+            print("SetSpeed " + gameObject + "  speed: "+s);
             controller.speed = s;
         }
 
-        public override void ScaleSpeed(float scale)
+        public override void SetSpeedScale(float scale)
         {
             controller.magSpeed = scale;
         }
 
-        public override void RestoreSpeed()
+        public override void RestoreSpeedScale()
         {
             controller.magSpeed = 1;
         }
