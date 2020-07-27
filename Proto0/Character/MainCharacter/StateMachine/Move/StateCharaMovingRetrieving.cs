@@ -21,6 +21,21 @@ namespace Proto0
 
             param.chara.shooter.eventOnMarkRetrieved += ToMoving;
             param.chara.shooter.eventOnMarkBouncedBack += ToMoving;
+
+            // Move
+            Vector3 dir = MovementHelper.GetMovement();
+            if (dir.magnitude >= param.chara.thresMove)
+            {
+                dir = MovementHelper.NormalizeAndScaleMovementByTime(dir);
+
+                MovingDirection mdirCur = MovementHelper.GetMovingDirection(dir);
+                if (mdirCur != mdirLast)
+                {
+                    Character.SwitchMovingAnimationState(mdirCur, param.animator);
+                    mdirLast = mdirCur;
+                }
+                param.chara.controller.Move(dir);
+            }
         }
 
         public override IState Update()

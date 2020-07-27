@@ -10,6 +10,11 @@ namespace Proto0
         private MovingDirection mdirLast = MovingDirection.Default;
         private bool toTransitToMovingRetrieving = false;
 
+        // SMOKE
+        private float durTime = 0f;
+        public float durMakeSmoke = 0.2f;
+
+
         public StateCharaFastMoving(StateParamChara param) : base(param) { }
 
         public override void OnEntrance()
@@ -42,6 +47,14 @@ namespace Proto0
             else
             {
                 return new StateCharaIdleDeployed(param); // StateCharaIdleDeployed
+            }
+
+            // SMOKE
+            durTime += Time.deltaTime;
+            if(durTime>= durMakeSmoke)
+            {
+                GameObject.Instantiate(param.chara.goSmoke, param.chara.transSmoke.position, Quaternion.identity);
+                durTime -= durMakeSmoke;
             }
 
             // Retrieve

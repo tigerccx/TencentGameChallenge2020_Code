@@ -8,6 +8,7 @@ namespace Proto0
     public class StateMachineMark : StateMachine
     {
         public StateParamMark paramMark;
+        public Animator animator;
 
         public bool IsDeploying { get{ BaseStateMark state = stateCur as BaseStateMark; return state.param.isDeploying; } }
         public bool IsActive { get { BaseStateMark state = stateCur as BaseStateMark; return state.param.isActive; } }

@@ -13,6 +13,9 @@ namespace Proto0
 
         private float speedCommon;
 
+        public GameObject goSmoke;
+        public Transform transSmoke;
+
         // Start is called before the first frame update
         void Start()
         {

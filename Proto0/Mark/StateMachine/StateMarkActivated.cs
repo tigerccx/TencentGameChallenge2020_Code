@@ -16,6 +16,9 @@ namespace Proto0
         {
             Debug.Log("Activated");
 
+            // Animator
+            param.animator.SetTrigger("ToEnergized");
+
             param.mark.GoZone.SetActive(true);
             durTemp = 0;
             param.isActive = true;

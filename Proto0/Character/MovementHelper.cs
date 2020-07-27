@@ -28,28 +28,23 @@ namespace Proto0
         {
             float x = dir.x;
             float y = dir.y;
-            if (x > y)
+            if(x>=y && x >= -y)
             {
-                if (x > -y)
-                {
-                    return MovingDirection.Right;
-                }
-                else
-                {
-                    return MovingDirection.Down;
-                }
+                return MovingDirection.Right;
             }
-            else
+            if(x<=y && x <= -y)
             {
-                if (x > -y)
-                {
-                    return MovingDirection.Up;
-                }
-                else
-                {
-                    return MovingDirection.Left;
-                }
+                return MovingDirection.Left;
             }
+            if (x < y && x > -y)
+            {
+                return MovingDirection.Up;
+            }
+            if (x > y && x < -y)
+            {
+                return MovingDirection.Down;
+            }
+            return MovingDirection.Default;
         }
     }
 }

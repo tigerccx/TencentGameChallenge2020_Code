@@ -31,12 +31,6 @@ namespace Proto0
             Vector3 dir = new Vector3(x, y, 0);
             if (dir.magnitude >= param.chara.thresMove)
             {
-                if (dir.magnitude > 1)
-                {
-                    dir = dir.normalized;
-                }
-                dir *= Time.deltaTime;
-                param.chara.controller.Move(dir);
                 return new StateCharaMovingDeploying(param); // StateCharaMovingDeploying
             }
 

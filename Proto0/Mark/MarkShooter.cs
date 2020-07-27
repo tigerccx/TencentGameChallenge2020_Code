@@ -82,6 +82,7 @@ namespace Proto0
             smMark = goMark.GetComponent<StateMachineMark>();
             StateParamMark param = new StateParamMark();
             param.mark = markInstance;
+            param.animator = smMark.animator;
             param.transformMarkShooter = transform;
             param.posTarg = posW;
             smMark.paramMark = param;

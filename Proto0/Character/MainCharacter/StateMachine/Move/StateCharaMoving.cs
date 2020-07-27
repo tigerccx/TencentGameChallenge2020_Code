@@ -17,6 +17,21 @@ namespace Proto0
 
             // Animator
             param.animator.SetTrigger("ToMoving");
+
+            // Move
+            Vector3 dir = MovementHelper.GetMovement();
+            if (dir.magnitude >= param.chara.thresMove)
+            {
+                dir = MovementHelper.NormalizeAndScaleMovementByTime(dir);
+
+                MovingDirection mdirCur = MovementHelper.GetMovingDirection(dir);
+                if (mdirCur != mdirLast)
+                {
+                    Character.SwitchMovingAnimationState(mdirCur, param.animator);
+                    mdirLast = mdirCur;
+                }
+                param.chara.controller.Move(dir);
+            }
         }
 
         public override IState Update()

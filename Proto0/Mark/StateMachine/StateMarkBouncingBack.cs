@@ -18,6 +18,9 @@ namespace Proto0
         {
             Debug.Log("Bounce back");
 
+            // Animator
+            param.animator.SetTrigger("ToFail");
+
             param.mark.ColliderMark.enabled = false;
             param.mark.Inflicter.enabled = false;
 

@@ -24,6 +24,7 @@ namespace Proto0
     public class StateParamMark
     {
         public Mark mark;
+        public Animator animator;
 
         public Transform transformMarkShooter;
         public Vector3 posTarg;
